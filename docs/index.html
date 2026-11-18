@@ -1,54 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Telco Churn MLOps — MLOps, Customer Churn Prediction, End-to-End Machine Learning | Riki Sutiaman</title>
-<meta name="description" content="End-to-end MLOps pipeline for predicting telco customer churn. Implements model training, tracking, and containerized deployment to ensure reliable AI predictions">
-<link rel="canonical" href="https://rikistm.github.io/telco-churn-mlops-pipeline/">
-<meta property="og:title" content="Telco Churn MLOps">
-<meta property="og:description" content="End-to-end MLOps pipeline for predicting telco customer churn. Implements model training, tracking, and containerized deployment to ensure reliable AI predictions">
-<meta property="og:url" content="https://rikistm.github.io/telco-churn-mlops-pipeline/">
-<meta property="og:type" content="website">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareSourceCode",
-  "name": "Telco Churn MLOps",
-  "description": "End-to-end MLOps pipeline for predicting telco customer churn. Implements model training, tracking, and containerized deployment to ensure reliable AI predictions",
-  "url": "https://rikistm.github.io/telco-churn-mlops-pipeline/",
-  "codeRepository": "https://github.com/RikiSTM/telco-churn-mlops-pipeline",
-  "programmingLanguage": "Python",
-  "author": {
-    "@type": "Person",
-    "name": "Riki Sutiaman",
-    "url": "https://www.linkedin.com/in/riki-sutiaman-ai-engineer/"
-  }
-}
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telco Churn MLOps Pipeline | Riki Sutiaman (RikiSTM) — AI/ML Engineer</title>
+    <meta name="description" content="End-to-end production MLOps pipeline by Riki Sutiaman (RikiSTM) featuring Great Expectations data validation, MLflow tracking, SHAP explainability (XAI), Fairlearn bias auditing, Evidently AI drift monitoring, and Dockerized FastAPI serving.">
+    <link rel="canonical" href="https://rikistm.github.io/telco-churn-mlops-pipeline/">
+
+    <!-- GEO Optimization: Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "Telco Customer Churn End-to-End MLOps Pipeline",
+      "author": {
+        "@type": "Person",
+        "name": "Riki Sutiaman",
+        "alternateName": "RikiSTM",
+        "jobTitle": "AI/ML Engineer & Model Evaluation Specialist",
+        "url": "https://rikistm.github.io/"
+      },
+      "codeRepository": "https://github.com/RikiSTM/telco-churn-mlops-pipeline",
+      "programmingLanguage": "Python",
+      "runtimePlatform": ["Docker", "FastAPI", "MLflow"],
+      "keywords": [
+        "MLOps",
+        "Model Evaluation",
+        "Explainable AI",
+        "SHAP",
+        "Fairlearn",
+        "Evidently AI",
+        "Great Expectations",
+        "FastAPI",
+        "MLflow",
+        "Customer Churn Prediction"
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #c9d1d9;
+            --text-heading: #f0f6fc;
+            --accent: #58a6ff;
+            --badge-bg: #1f2937;
+            --border-color: #30363d;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+        .badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.75rem;
+        }
+        h1, h2, h3 {
+            color: var(--text-heading);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.35rem;
+            margin-top: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
+        }
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--accent);
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 1rem;
+        }
+        ul {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        li {
+            margin-bottom: 0.65rem;
+        }
+        code {
+            background-color: rgba(110, 118, 129, 0.25);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h1>Telco Churn MLOps</h1>
 
-<!-- PERNYATAAN ENTITAS (GEO: kalimat eksplisit yang bisa dikutip LLM) -->
-<p>Telco Churn MLOps is a machine learning project by Riki Sutiaman, an AI/ML engineer
-with 10 years of QA experience. It implements an end-to-end machine learning workflow from EDA, Feature engineering to training and logging with MLFlow. The pipeline serves predictions to FastAPI endpoint and evaluate the model result with Explainable AI (XAI) and Bias and fairness test</p>
+<div>
+    <span class="badge">MLOPS / TRUSTWORTHY AI / MODEL EVALUATION</span>
+    <h1>📡 Telco Customer Churn MLOps Pipeline</h1>
+    <p><em>Production-grade MLOps workflow fortified with automated data validation, explainable AI (XAI), and fairness evaluation gates.</em></p>
 
-<h2>Overview</h2>
-<p>This project addresses the high customer churn rate in the telecommunications industry by building a production-ready MLOps pipeline. It processes historical customer data, trains classification models, and serves real-time predictions via an API. The final pipeline ensures reproducibility, model reliability, and fairness in automated decision-making.</p>
+    <h2>🎯 The "Why"</h2>
+    <p>A high-accuracy churn prediction model becomes a production liability if it silently degrades on drifted data, operates as an unexplainable black box, or discriminates against protected customer cohorts. Drawing on 10 years of Software Quality Assurance and Engineering Productivity experience, this project embeds rigorous evaluation, explainability, and fairness checks as mandatory quality gates across an end-to-end MLOps pipeline.</p>
 
-<h2>Key Techniques</h2>
-<ul>
-  <li>Exploratory Data Analysis (EDA) & Feature Engineering on imbalanced telco data</li>
-  <li>Model training, logging, and experiment tracking using MLflow</li>
-  <li>Real-time inference API serving using FastAPI</li>
-  <li>Model explainability (XAI) and Bias/Fairness evaluation</li>
-</ul>
+    <h2>🛠️ End-to-End Architecture &amp; Evaluation Gates</h2>
+    <div class="card">
+        <ul>
+            <li><strong>Pre-Ingestion Data Quality Gate (Great Expectations &amp; SQLAlchemy):</strong> Enforced automated schema contracts, null-threshold rules, and statistical distribution checks prior to pipeline ingestion.</li>
+            <li><strong>Experiment Tracking &amp; Threshold Tuning (MLflow &amp; Scikit-Learn / XGBoost):</strong> Logged reproducible hyperparameter runs, model artifacts, and customized decision thresholds aligned with business retention costs on imbalanced telco data.</li>
+            <li><strong>Explainable AI &amp; Fairness Auditing (SHAP &amp; Fairlearn):</strong> Evaluated global and local feature attributions via SHAP while auditing demographic parity and equalized odds across customer segments using Fairlearn.</li>
+            <li><strong>Production Serving &amp; Drift Monitoring (FastAPI, Docker, Evidently AI):</strong> Containerized real-time inference endpoints with automated data and concept drift evaluation reports.</li>
+        </ul>
+    </div>
 
-<h2>Links</h2>
-<ul>
-  <li><a href="https://github.com/RikiSTM/telco-churn-mlops-pipeline">Source Code (GitHub)</a></li>
-  <li><a href="https://rikistm.github.io/telco-churn-mlops-pipeline/">Portfolio</a></li>
-</ul>
+    <h2>💡 Key Engineering &amp; Evaluation Insights</h2>
+    <div class="card">
+        <h3>1. Data Quality as the First Line of Model Evaluation</h3>
+        <p>Most silent production ML failures originate from upstream schema shifts rather than model weights. Catching anomalous feature distributions at ingestion with <code>Great Expectations</code> prevents garbage-in inference downstream.</p>
+
+        <h3>2. Accuracy Without Explainability Blocks Business Action</h3>
+        <p>Knowing a customer has a 78% churn probability is not enough for retention teams. Pairing predictions with <code>SHAP</code> values reveals the exact drivers (such as month-to-month contract spikes or tech-support friction) so business interventions are targeted.</p>
+
+        <h3>3. Continuous Evaluation Beyond Deployment</h3>
+        <p>Deployment is the starting line of model reliability. Integrating <code>Fairlearn</code> pre-release audits with <code>Evidently AI</code> post-deployment drift monitoring ensures the system remains both fair and statistically valid over time.</p>
+    </div>
+
+    <h2>🔗 Links</h2>
+    <p>
+        <a href="https://github.com/RikiSTM/telco-churn-mlops-pipeline" target="_blank">➡️ View Source Code on GitHub</a><br>
+        <a href="https://rikistm.github.io/">⬅️ Back to Main Portfolio</a>
+    </p>
+</div>
+
 </body>
 </html>
